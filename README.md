@@ -1,4 +1,5 @@
 **SQLite Chat Assistant**
+
 A simple chatbot for interacting with an SQLite database using natural language queries.
 
 This project is designed to understand and process user queries related to employees and departments stored in an SQLite database. Instead of using an AI model, the chatbot follows a rule-based approach to convert user queries into SQL statements.
