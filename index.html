@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Assistant</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+            background-color: #f4f4f4;
+        }
+        #chat-container {
+            background: white;
+            padding: 20px;
+            width: 50%;
+            margin: auto;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        input, button {
+            padding: 10px;
+            margin: 5px;
+            width: 80%;
+            font-size: 16px;
+        }
+        button {
+            cursor: pointer;
+            background-color: #28a745;
+            color: white;
+            border: none;
+        }
+        #response {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="chat-container">
+        <h2>SQLite Chat Assistant</h2>
+        <input type="text" id="query" placeholder="Enter your query..." />
+        <button onclick="sendQuery()">Ask</button>
+        <p id="response"></p>
+    </div>
+
+    <script>
+        function sendQuery() {
+            const query = document.getElementById("query").value;
+
+            fetch(`/query?q=${encodeURIComponent(query)}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        document.getElementById("response").innerText = "Error: " + data.error;
+                    } else {
+                        document.getElementById("response").innerText = "Result: " + JSON.stringify(data.result);
+                    }
+                })
+                .catch(error => console.error("Error:", error));
+        }
+    </script>
+
+</body>
+</html>
